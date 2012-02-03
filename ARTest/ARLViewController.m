@@ -13,7 +13,9 @@ AVCaptureSession *session;
     CIContext *coreImageContext;
     GLuint _renderBuffer;
     CGContextRef cgcontext;
+    CIDetector* detector;
     
+    BOOL isScanningForFace;
     
     CGSize screenSize;
 }
@@ -30,8 +32,10 @@ AVCaptureSession *session;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     NSError * error;
     
+    detector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:[NSDictionary dictionaryWithObject:CIDetectorAccuracyHigh forKey:CIDetectorAccuracy]];
     
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
@@ -98,7 +102,7 @@ AVCaptureSession *session;
  
     float heightSc = screenSize.height/(float)CVPixelBufferGetHeight(pixelBuffer);
     float widthSc = screenSize.width/(float)CVPixelBufferGetWidth(pixelBuffer);
- 
+    
     heightSc = widthSc = MAX(heightSc, widthSc);
     
     CGAffineTransform transform = CGAffineTransformMakeScale(widthSc, heightSc);
@@ -107,6 +111,31 @@ AVCaptureSession *session;
     image = [CIFilter filterWithName:@"CIAffineTransform" keysAndValues:kCIInputImageKey, image, @"inputTransform", [NSValue valueWithCGAffineTransform:transform],nil].outputImage; 
  
     [coreImageContext drawImage:image atPoint:CGPointZero fromRect:[image extent]];
+    
+    
+    
+    if(!isScanningForFace) {
+        isScanningForFace = YES;
+        
+        CGAffineTransform smallTransform = CGAffineTransformMakeScale(.25, .25);
+        CIImage* smallImage = [CIFilter filterWithName:@"CIAffineTransform" keysAndValues:kCIInputImageKey, image, @"inputTransform", [NSValue valueWithCGAffineTransform:smallTransform], nil].outputImage; 
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+            NSArray *features = [detector featuresInImage:smallImage];
+            NSLog(@"%d faces detected", features.count);
+            
+            for(CIFaceFeature* feature in features) {
+                NSLog(@"%@", feature);
+            }
+            
+            [coreImageContext drawImage:image atPoint:CGPointZero fromRect:[image extent]];
+            
+            isScanningForFace = NO;
+        });
+    }
+    
+    
     [self.context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
