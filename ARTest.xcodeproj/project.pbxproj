@@ -16,6 +16,13 @@
 		02D6C9E414DC5A6800E9B909 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02D6C9E214DC5A6800E9B909 /* MainStoryboard_iPhone.storyboard */; };
 		02D6C9E714DC5A6800E9B909 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02D6C9E514DC5A6800E9B909 /* MainStoryboard_iPad.storyboard */; };
 		02D6C9EA14DC5A6800E9B909 /* ARLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6C9E914DC5A6800E9B909 /* ARLViewController.m */; };
+		02D6C9F114DC5D4900E9B909 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6C9F014DC5D4900E9B909 /* AVFoundation.framework */; };
+		02D6C9F314DC5D5500E9B909 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6C9F214DC5D5500E9B909 /* CoreImage.framework */; };
+		02D6C9F514DC5D5A00E9B909 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6C9F414DC5D5A00E9B909 /* QuartzCore.framework */; };
+		02D6CA0014DC738A00E9B909 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6C9FF14DC738A00E9B909 /* GLKit.framework */; };
+		02D6CA0214DC748600E9B909 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6CA0114DC748600E9B909 /* OpenGLES.framework */; };
+		02D6CA0414DC74A300E9B909 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6CA0314DC74A300E9B909 /* CoreVideo.framework */; };
+		02D6CA0614DC74A800E9B909 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6CA0514DC74A800E9B909 /* CoreMedia.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +40,14 @@
 		02D6C9E614DC5A6800E9B909 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		02D6C9E814DC5A6800E9B909 /* ARLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARLViewController.h; sourceTree = "<group>"; };
 		02D6C9E914DC5A6800E9B909 /* ARLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARLViewController.m; sourceTree = "<group>"; };
+		02D6C9F014DC5D4900E9B909 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		02D6C9F214DC5D5500E9B909 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		02D6C9F414DC5D5A00E9B909 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		02D6C9FA14DC711700E9B909 /* BRMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRMacros.h; sourceTree = "<group>"; };
+		02D6C9FF14DC738A00E9B909 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		02D6CA0114DC748600E9B909 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		02D6CA0314DC74A300E9B909 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		02D6CA0514DC74A800E9B909 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,9 +55,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D6CA0614DC74A800E9B909 /* CoreMedia.framework in Frameworks */,
+				02D6CA0414DC74A300E9B909 /* CoreVideo.framework in Frameworks */,
+				02D6CA0214DC748600E9B909 /* OpenGLES.framework in Frameworks */,
+				02D6CA0014DC738A00E9B909 /* GLKit.framework in Frameworks */,
+				02D6C9F514DC5D5A00E9B909 /* QuartzCore.framework in Frameworks */,
+				02D6C9F314DC5D5500E9B909 /* CoreImage.framework in Frameworks */,
+				02D6C9D514DC5A6800E9B909 /* CoreGraphics.framework in Frameworks */,
+				02D6C9F114DC5D4900E9B909 /* AVFoundation.framework in Frameworks */,
 				02D6C9D114DC5A6800E9B909 /* UIKit.framework in Frameworks */,
 				02D6C9D314DC5A6800E9B909 /* Foundation.framework in Frameworks */,
-				02D6C9D514DC5A6800E9B909 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +91,13 @@
 		02D6C9CF14DC5A6800E9B909 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02D6CA0514DC74A800E9B909 /* CoreMedia.framework */,
+				02D6CA0314DC74A300E9B909 /* CoreVideo.framework */,
+				02D6CA0114DC748600E9B909 /* OpenGLES.framework */,
+				02D6C9FF14DC738A00E9B909 /* GLKit.framework */,
+				02D6C9F414DC5D5A00E9B909 /* QuartzCore.framework */,
+				02D6C9F214DC5D5500E9B909 /* CoreImage.framework */,
+				02D6C9F014DC5D4900E9B909 /* AVFoundation.framework */,
 				02D6C9D014DC5A6800E9B909 /* UIKit.framework */,
 				02D6C9D214DC5A6800E9B909 /* Foundation.framework */,
 				02D6C9D414DC5A6800E9B909 /* CoreGraphics.framework */,
@@ -79,6 +108,7 @@
 		02D6C9D614DC5A6800E9B909 /* ARTest */ = {
 			isa = PBXGroup;
 			children = (
+				02D6C9FA14DC711700E9B909 /* BRMacros.h */,
 				02D6C9DF14DC5A6800E9B909 /* ARLAppDelegate.h */,
 				02D6C9E014DC5A6800E9B909 /* ARLAppDelegate.m */,
 				02D6C9E214DC5A6800E9B909 /* MainStoryboard_iPhone.storyboard */,

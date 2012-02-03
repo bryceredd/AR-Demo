@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import <GLKit/GLKit.h>
 
-@interface ARLViewController : UIViewController
+@interface ARLViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @end
