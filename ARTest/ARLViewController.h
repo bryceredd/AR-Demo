@@ -12,5 +12,6 @@
 #import <CoreImage/CoreImage.h>
 
 @interface ARLViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
+@property (weak, nonatomic) IBOutlet GLKView *glkView;
 
 @end
