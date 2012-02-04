@@ -15,7 +15,6 @@
 
 - (id) initWithDefinition:(NSDictionary*)definition {
     if((self = [super init])) {
-        // roughly 1 lat/long degree is 66
         
         float hisLatitude = [[definition objectForKey:@"lat"] floatValue];
         float hisLongitude = [[definition objectForKey:@"lon"] floatValue];
@@ -28,7 +27,7 @@
 
 
         self.distanceFromMe = [NSNumber numberWithFloat:[myLoc distanceFromLocation:hisLoc]];
-        self.angle = [NSNumber numberWithFloat:radiansToDegrees(atan2f(myLatitude-hisLatitude, myLongitude-hisLongitude))];
+        self.angle = [NSNumber numberWithFloat:atan2f(myLatitude-hisLatitude, myLongitude-hisLongitude)];
 
 
     } return self;

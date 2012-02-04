@@ -11,7 +11,9 @@
 #import <GLKit/GLKit.h>
 #import <CoreImage/CoreImage.h>
 
-@interface ARLViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
+#import "ARLPlayersManager.h"
+
+@interface ARLViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate, ARLPlayersDelegate, UIAccelerometerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *face;
 @property (weak, nonatomic) IBOutlet UIImageView *monster;
 - (IBAction)radar:(id)sender;

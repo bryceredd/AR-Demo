@@ -22,18 +22,32 @@ AVCaptureSession *session;
 -(void)setupCGContext;
 -(CGRect) monsterFrameFromFace:(CGRect)face;
 @property (strong, nonatomic) EAGLContext *context;
+@property (nonatomic, strong) UIAccelerometer* accelerometer;
 @end
 
 @implementation ARLViewController
 @synthesize face;
 @synthesize monster;
 @synthesize context;
+@synthesize accelerometer;
 
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    [[ARLPlayersManager instance] addDelegate:self];
+    self.accelerometer = [UIAccelerometer sharedAccelerometer];
+	self.accelerometer.updateInterval = 0.25;
+	self.accelerometer.delegate = self;
+    
+    	// Listen for changes in device orientation
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object:nil];
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];	
+
+
     
     NSError * error;
     
@@ -96,7 +110,7 @@ AVCaptureSession *session;
     CGColorSpaceRelease(colorSpace);
 }
 
--(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
  
     CVPixelBufferRef pixelBuffer = (CVPixelBufferRef)CMSampleBufferGetImageBuffer(sampleBuffer);
  
@@ -210,5 +224,16 @@ AVCaptureSession *session;
     
     [self presentModalViewController:controller animated:YES];
 }
+
+
+
+
+// calculate labels
+
+- (void) didReceiveUpdate {
+    
+}
+
+
 
 @end

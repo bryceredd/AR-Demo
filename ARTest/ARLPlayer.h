@@ -10,7 +10,7 @@
 
 @interface ARLPlayer : NSObject
 @property(nonatomic, strong) NSNumber* distanceFromMe; // in miles
-@property(nonatomic, strong) NSNumber* angle; // in degrees
+@property(nonatomic, strong) NSNumber* angle; // in radians
 
 - (id) initWithDefinition:(NSDictionary*)definition;
 

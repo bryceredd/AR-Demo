@@ -13,10 +13,7 @@
     int degree;
 }
 
-- (void) tick;
 - (void) updateUI;
-- (void) sendLocation;
-- (void) requestPlayerLocations;
 @end
 
 @implementation ARLRadarViewController
@@ -35,7 +32,6 @@
 }
 
 - (IBAction)close:(id)sender {
-    
     [self dismissModalViewControllerAnimated:YES];
 }
 
