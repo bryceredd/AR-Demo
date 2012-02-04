@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
+#import "ARLPlayersManager.h"
 
-@interface ARLRadarViewController : UIViewController <CLLocationManagerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *sweeper;
-@property (nonatomic, strong) CLLocationManager* locationManager;
+@interface ARLRadarViewController : UIViewController <ARLPlayersDelegate>
+
 - (IBAction)close:(id)sender;
 
 @end

@@ -22,6 +22,8 @@
 #define DECREMENT_NETWORK_ACTIVITY_INDICATOR() [[[UIApplication sharedApplication] delegate] performSelector:@selector(decrementNetworkActivityIndicator)]
 
 #define degreesToRadian(x) (M_PI * (x) / 180.0)
+#define radianToDegrees(x) (180.0 * (x) / M_PI)
+
 #define RGB(r,g,b) [UIColor colorWithRed:(float)r/0xff green:(float)g/0xff blue:(float)b/0xff alpha:1.0]
 
 #define CGRectShrink(_rect_, _padding_) CGRectMake(_rect_.origin.x+_padding_, _rect_.origin.y+_padding_, _rect_.size.width-_padding_*2, _rect_.size.height-_padding_*2);

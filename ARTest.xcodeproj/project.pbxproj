@@ -86,6 +86,10 @@
 		02D6CAFE14DCD80600E9B909 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6CAFC14DCD7DA00E9B909 /* SystemConfiguration.framework */; };
 		02D6CB0114DCFEFB00E9B909 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 02D6CAFF14DCFEFB00E9B909 /* JSONKit.h */; };
 		02D6CB0214DCFEFB00E9B909 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6CB0014DCFEFB00E9B909 /* JSONKit.m */; };
+		02D6CB0514DD079900E9B909 /* ARLPlayersManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 02D6CB0314DD079900E9B909 /* ARLPlayersManager.h */; };
+		02D6CB0614DD079900E9B909 /* ARLPlayersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6CB0414DD079900E9B909 /* ARLPlayersManager.m */; };
+		02D6CB0914DD0A6A00E9B909 /* ARLPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 02D6CB0714DD0A6A00E9B909 /* ARLPlayer.h */; };
+		02D6CB0A14DD0A6A00E9B909 /* ARLPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6CB0814DD0A6A00E9B909 /* ARLPlayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,6 +185,10 @@
 		02D6CAFC14DCD7DA00E9B909 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		02D6CAFF14DCFEFB00E9B909 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		02D6CB0014DCFEFB00E9B909 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		02D6CB0314DD079900E9B909 /* ARLPlayersManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLPlayersManager.h; sourceTree = "<group>"; };
+		02D6CB0414DD079900E9B909 /* ARLPlayersManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLPlayersManager.m; sourceTree = "<group>"; };
+		02D6CB0714DD0A6A00E9B909 /* ARLPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLPlayer.h; sourceTree = "<group>"; };
+		02D6CB0814DD0A6A00E9B909 /* ARLPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLPlayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +285,10 @@
 				02D6CA1414DCB2A200E9B909 /* ARLRadarViewController.h */,
 				02D6CA1514DCB2A200E9B909 /* ARLRadarViewController.m */,
 				02D6C9D714DC5A6800E9B909 /* Supporting Files */,
+				02D6CB0314DD079900E9B909 /* ARLPlayersManager.h */,
+				02D6CB0414DD079900E9B909 /* ARLPlayersManager.m */,
+				02D6CB0714DD0A6A00E9B909 /* ARLPlayer.h */,
+				02D6CB0814DD0A6A00E9B909 /* ARLPlayer.m */,
 			);
 			path = ARTest;
 			sourceTree = "<group>";
@@ -392,6 +404,8 @@
 				02D6CAE914DCD2F500E9B909 /* ASICloudFilesObjectRequest.h in Headers */,
 				02D6CAEB14DCD2F500E9B909 /* ASICloudFilesRequest.h in Headers */,
 				02D6CB0114DCFEFB00E9B909 /* JSONKit.h in Headers */,
+				02D6CB0514DD079900E9B909 /* ARLPlayersManager.h in Headers */,
+				02D6CB0914DD0A6A00E9B909 /* ARLPlayer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +527,8 @@
 				02D6CAEA14DCD2F500E9B909 /* ASICloudFilesObjectRequest.m in Sources */,
 				02D6CAEC14DCD2F500E9B909 /* ASICloudFilesRequest.m in Sources */,
 				02D6CB0214DCFEFB00E9B909 /* JSONKit.m in Sources */,
+				02D6CB0614DD079900E9B909 /* ARLPlayersManager.m in Sources */,
+				02D6CB0A14DD0A6A00E9B909 /* ARLPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
