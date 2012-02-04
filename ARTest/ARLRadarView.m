@@ -68,9 +68,9 @@
 	// Set the circle fill color to green
 	CGContextSetRGBFillColor(contextRef, 252.0, 130.0, 0.0, 1.0);
     for(ARLPlayer* player in [ARLPlayersManager instance].players) {
-        
-        playerCenter.x = screenCenter.x + scale * player.distanceFromMe.floatValue * cos(player.angle.floatValue);
-        playerCenter.y = screenCenter.y + scale * player.distanceFromMe.floatValue * sin(player.angle.floatValue);
+        float angle = player.angle.floatValue  - degreesToRadian([ARLPlayersManager instance].currentHeading.trueHeading);
+        playerCenter.x = screenCenter.x + scale * player.distanceFromMe.floatValue * cos(angle);
+        playerCenter.y = screenCenter.y + scale * player.distanceFromMe.floatValue * sin(angle);
         CGContextAddArc(contextRef,playerCenter.x, playerCenter.y, 4, 0,2*3.1415926535898,1);
         CGContextDrawPath(contextRef,kCGPathFill);
     }
