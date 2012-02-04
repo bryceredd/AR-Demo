@@ -152,8 +152,6 @@ AVCaptureSession *session;
             
             for(CIFaceFeature* feature in features) {
                 CGRect featureRect = [feature bounds];
-            
-                NSLog(@"small image rect %@", NSStringFromCGRect(smallImageRect));
                 
                 float ratio = screenSize.height / screenSize.width;
                 float actualVisibleHeight = ratio * CGRectGetWidth(smallImageRect);

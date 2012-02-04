@@ -79,11 +79,13 @@
         CGContextDrawPath(contextRef,kCGPathFill);
     }
     
-    // Draw the current player
-    CGContextSetRGBFillColor(contextRef, 251.0, 143.0, 0.0, 1.0);
     
-    CGContextAddArc(contextRef, screenCenter.x, screenCenter.y, 5.0, 0,2*3.1415926535898,1);
-    CGContextDrawPath(contextRef,kCGPathFill);
+    // Draw the current player
+    CGContextSetRGBFillColor(contextRef, 2.0, 251.0, 143.0, 1.0);
+    CGContextSetRGBStrokeColor(contextRef, 2.0, 251.0, 143.0, 1.0);
+    CGContextSetLineWidth(contextRef, 0.0);
+    CGContextAddArc(contextRef, self.center.x,self.center.y, 5.0, 0,2*3.1415926535898,1);
+    CGContextDrawPath(contextRef, kCGPathFill);
     
     CGContextRestoreGState(contextRef);
     
