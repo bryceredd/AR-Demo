@@ -56,6 +56,9 @@
     [self sendLocation];
     [self requestPlayers];
     
+    for(ARLPlayer* player in self.players) {
+        NSLog(@"player at %f %f away from me", player.angle.floatValue, player.distanceFromMe.floatValue);
+    }
 }
 
 - (void) sendLocation {
@@ -136,10 +139,11 @@
 
 - (void) notifyDelegates {
     for(NSObject<ARLPlayersDelegate>* delegate in self.delegates) {
-        [delegate didReceiveUpdate];
+        if([delegate respondsToSelector:@selector(didReceiveUpdate)]) {
+            [delegate didReceiveUpdate];
+        }
     }
 }
-
 
 - (void) addDelegate:(NSObject<ARLPlayersDelegate>*)delegate {
     if(self.delegates.count == 0) {

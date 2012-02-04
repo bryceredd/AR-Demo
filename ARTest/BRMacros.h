@@ -22,7 +22,7 @@
 #define DECREMENT_NETWORK_ACTIVITY_INDICATOR() [[[UIApplication sharedApplication] delegate] performSelector:@selector(decrementNetworkActivityIndicator)]
 
 #define degreesToRadian(x) (M_PI * (x) / 180.0)
-#define radianToDegrees(x) (180.0 * (x) / M_PI)
+#define radiansToDegrees(x) (180.0 * (x) / M_PI)
 
 #define RGB(r,g,b) [UIColor colorWithRed:(float)r/0xff green:(float)g/0xff blue:(float)b/0xff alpha:1.0]
 

@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 @protocol ARLPlayersDelegate
+@optional
 - (void) didReceiveUpdate;
 @end
 

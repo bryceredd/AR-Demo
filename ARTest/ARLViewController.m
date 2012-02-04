@@ -174,13 +174,13 @@ AVCaptureSession *session;
 }
 
 - (CGRect) monsterFrameFromFace:(CGRect)rect {
-    float width = rect.size.width;
     
     CGRect monsterRect;
-    monsterRect.origin.x = CGRectGetMinX(rect) - width;
-    monsterRect.origin.y = CGRectGetMinY(rect);
-    monsterRect.size.width = width * 3;
-    monsterRect.size.height = self.monster.frame.size.width * (2/1.5);
+    
+    monsterRect.size.width = CGRectGetWidth(rect) * 1.5;
+    monsterRect.size.height = CGRectGetWidth(rect) * 1.5;
+    monsterRect.origin.x = CGRectGetMinX(rect) - monsterRect.size.width*.25;
+    monsterRect.origin.y = rect.origin.y - monsterRect.size.width;
     
     return monsterRect;
 }

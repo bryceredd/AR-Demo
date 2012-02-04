@@ -90,6 +90,7 @@
 		02D6CB0614DD079900E9B909 /* ARLPlayersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6CB0414DD079900E9B909 /* ARLPlayersManager.m */; };
 		02D6CB0914DD0A6A00E9B909 /* ARLPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 02D6CB0714DD0A6A00E9B909 /* ARLPlayer.h */; };
 		02D6CB0A14DD0A6A00E9B909 /* ARLPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6CB0814DD0A6A00E9B909 /* ARLPlayer.m */; };
+		02D6CB0C14DD10D300E9B909 /* bowlerhat.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D6CB0B14DD10D300E9B909 /* bowlerhat.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +190,7 @@
 		02D6CB0414DD079900E9B909 /* ARLPlayersManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLPlayersManager.m; sourceTree = "<group>"; };
 		02D6CB0714DD0A6A00E9B909 /* ARLPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLPlayer.h; sourceTree = "<group>"; };
 		02D6CB0814DD0A6A00E9B909 /* ARLPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLPlayer.m; sourceTree = "<group>"; };
+		02D6CB0B14DD10D300E9B909 /* bowlerhat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bowlerhat.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				02D6CA1814DCCC0D00E9B909 /* Monster1.png */,
+				02D6CB0B14DD10D300E9B909 /* bowlerhat.png */,
 				02D6C9FA14DC711700E9B909 /* BRMacros.h */,
 				02D6C9DF14DC5A6800E9B909 /* ARLAppDelegate.h */,
 				02D6C9E014DC5A6800E9B909 /* ARLAppDelegate.m */,
@@ -483,6 +486,7 @@
 				02D6C9E414DC5A6800E9B909 /* MainStoryboard_iPhone.storyboard in Resources */,
 				02D6C9E714DC5A6800E9B909 /* MainStoryboard_iPad.storyboard in Resources */,
 				02D6CA1914DCCC0D00E9B909 /* Monster1.png in Resources */,
+				02D6CB0C14DD10D300E9B909 /* bowlerhat.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
