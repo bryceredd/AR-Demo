@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface ARLRadarViewController : UIViewController
+@interface ARLRadarViewController : UIViewController <CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *sweeper;
+@property (nonatomic, strong) CLLocationManager* locationManager;
 - (IBAction)close:(id)sender;
 
 @end
