@@ -20,11 +20,13 @@ AVCaptureSession *session;
     CGSize screenSize;
 }
 -(void)setupCGContext;
+-(CGRect) monsterFrameFromFace:(CGRect)face;
 @property (strong, nonatomic) EAGLContext *context;
 @end
 
 @implementation ARLViewController
 @synthesize face;
+@synthesize monster;
 @synthesize context;
 
 
@@ -139,8 +141,24 @@ AVCaptureSession *session;
                 
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [UIView animateWithDuration:.25 animations:^{
+                    [UIView animateWithDuration:.5 animations:^{
                         self.face.frame = rect;
+                        self.monster.frame = [self monsterFrameFromFace:rect];
+                        self.monster.alpha = 1.f;
+                    } completion:^(BOOL finished) {
+//                        [UIView animateWithDuration:.25 animations:^{
+//                            self.monster.frame = [self monsterFrameFromFace:rect];
+//                        }];
+                    }];
+                });
+                
+                break;
+            }
+            
+            if(![features count]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [UIView animateWithDuration:3.25 animations:^{
+                        self.monster.alpha = 0;
                     }];
                 });
             }
@@ -155,10 +173,21 @@ AVCaptureSession *session;
     [self.context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
-
+- (CGRect) monsterFrameFromFace:(CGRect)rect {
+    float width = rect.size.width;
+    
+    CGRect monsterRect;
+    monsterRect.origin.x = CGRectGetMinX(rect) - width;
+    monsterRect.origin.y = CGRectGetMinY(rect);
+    monsterRect.size.width = width * 3;
+    monsterRect.size.height = self.monster.frame.size.width * (2/1.5);
+    
+    return monsterRect;
+}
 
 - (void)viewDidUnload {
     [self setFace:nil];
+    [self setMonster:nil];
     [super viewDidUnload];
 }
 

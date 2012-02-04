@@ -24,6 +24,7 @@
 		02D6CA0414DC74A300E9B909 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6CA0314DC74A300E9B909 /* CoreVideo.framework */; };
 		02D6CA0614DC74A800E9B909 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6CA0514DC74A800E9B909 /* CoreMedia.framework */; };
 		02D6CA1614DCB2A200E9B909 /* ARLRadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6CA1514DCB2A200E9B909 /* ARLRadarViewController.m */; };
+		02D6CA1914DCCC0D00E9B909 /* Monster1.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D6CA1814DCCC0D00E9B909 /* Monster1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		02D6CA0514DC74A800E9B909 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		02D6CA1414DCB2A200E9B909 /* ARLRadarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLRadarViewController.h; sourceTree = "<group>"; };
 		02D6CA1514DCB2A200E9B909 /* ARLRadarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLRadarViewController.m; sourceTree = "<group>"; };
+		02D6CA1814DCCC0D00E9B909 /* Monster1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Monster1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		02D6C9D614DC5A6800E9B909 /* ARTest */ = {
 			isa = PBXGroup;
 			children = (
+				02D6CA1814DCCC0D00E9B909 /* Monster1.png */,
 				02D6C9FA14DC711700E9B909 /* BRMacros.h */,
 				02D6C9DF14DC5A6800E9B909 /* ARLAppDelegate.h */,
 				02D6C9E014DC5A6800E9B909 /* ARLAppDelegate.m */,
@@ -190,6 +193,7 @@
 				02D6C9DB14DC5A6800E9B909 /* InfoPlist.strings in Resources */,
 				02D6C9E414DC5A6800E9B909 /* MainStoryboard_iPhone.storyboard in Resources */,
 				02D6C9E714DC5A6800E9B909 /* MainStoryboard_iPad.storyboard in Resources */,
+				02D6CA1914DCCC0D00E9B909 /* Monster1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
