@@ -43,6 +43,8 @@
     /* Draw concentric circles */
 	// Get the contextRef
 	CGContextRef contextRef = UIGraphicsGetCurrentContext();
+    
+    CGContextSaveGState(contextRef);
 	
 	// Set the border width
 	CGContextSetLineWidth(contextRef, 3.0);
@@ -78,8 +80,10 @@
     // Draw the current player
     CGContextSetRGBFillColor(contextRef, 251.0, 143.0, 0.0, 1.0);
     
-    CGContextAddArc(contextRef, screenCenter.x, screenCenter.y, 10.0, 0,2*3.1415926535898,1);
+    CGContextAddArc(contextRef, screenCenter.x, screenCenter.y, 5.0, 0,2*3.1415926535898,1);
     CGContextDrawPath(contextRef,kCGPathFill);
+    
+    CGContextRestoreGState(contextRef);
     
 }
 

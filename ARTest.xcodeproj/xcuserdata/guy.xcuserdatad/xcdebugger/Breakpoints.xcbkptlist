@@ -8,13 +8,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "ARTest/ARLPlayersManager.m"
-         timestampString = "350083897.899212"
+         filePath = "ARTest/ARLRadarView.m"
+         timestampString = "350085912.757456"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "122"
-         endingLineNumber = "122"
-         landmarkName = "-locationManager:didUpdateHeading:"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
+         landmarkName = "-drawRect:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
