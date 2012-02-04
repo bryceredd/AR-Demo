@@ -19,10 +19,17 @@
     if (self) {
         [[ARLPlayersManager instance] addDelegate:self];
         numCircles = 3;
+        
         if (self.bounds.size.width > self.bounds.size.height)
+        {
             spacing = self.bounds.size.width / (numCircles * 2);
+            scale = self.bounds.size.width/1000;
+        }
         else
+        {
             spacing = self.bounds.size.height / (numCircles * 2);
+            scale = self.bounds.size.width/1000;
+        }
     }
     return self;
 }
@@ -37,12 +44,14 @@
     /* Draw concentric circles */
 	// Get the contextRef
 	CGContextRef contextRef = UIGraphicsGetCurrentContext();
+    
+    CGContextSaveGState(contextRef);
 	
 	// Set the border width
-	CGContextSetLineWidth(contextRef, 5.0);
+	CGContextSetLineWidth(contextRef, 3.0);
 	
-	// Set the cicle border color to green
-	CGContextSetRGBStrokeColor(contextRef, 0.0, 255.0, 0.0, 1.0);
+	// Set the cicle border color 
+	CGContextSetRGBStrokeColor(contextRef, 133.0, 130.0, 130.0, 1.0);
 	
 	// Draw the circles
     for (int i = 1; i <= numCircles; i++)
@@ -55,20 +64,28 @@
 
     // Draw the players
     CGPoint playerCenter;
-	// Set the circle fill color to green
-	CGContextSetRGBFillColor(contextRef, 0.0, 255.0, 0.0, 1.0);
-    for(ARLPlayer* player in [ARLPlayersManager instance].players) {
-        
-        // add compass offset:
-        float angle = player.angle.floatValue - degreesToRadian([ARLPlayersManager instance].currentHeading.trueHeading);
+    CGPoint screenCenter;
+    screenCenter.x = self.bounds.size.width / 2;
+    screenCenter.y = self.bounds.size.height / 2;
     
-        playerCenter.x = center.x + player.distanceFromMe.floatValue * cos(angle);
-        playerCenter.y = center.y + player.distanceFromMe.floatValue * sin(angle);
-        CGContextAddArc(contextRef,playerCenter.x, playerCenter.y, 4, 0, 2*M_PI, 1);
-        CGContextDrawPath(contextRef,kCGPathFillStroke);
-//        NSLog(@"player at %f %f away from me", player.angle.floatValue, player.distanceFromMe.floatValue);
+	// Set the circle fill color to green
+	CGContextSetRGBFillColor(contextRef, 252.0, 130.0, 0.0, 1.0);
+    for(ARLPlayer* player in [ARLPlayersManager instance].players) {
+    
+        float angle = player.angle.floatValue  - degreesToRadian([ARLPlayersManager instance].currentHeading.trueHeading);
+        playerCenter.x = screenCenter.x + scale * player.distanceFromMe.floatValue * cos(angle);
+        playerCenter.y = screenCenter.y + scale * player.distanceFromMe.floatValue * sin(angle);
+        CGContextAddArc(contextRef,playerCenter.x, playerCenter.y, 4, 0,2*3.1415926535898,1);
+        CGContextDrawPath(contextRef,kCGPathFill);
     }
-
+    
+    // Draw the current player
+    CGContextSetRGBFillColor(contextRef, 251.0, 143.0, 0.0, 1.0);
+    
+    CGContextAddArc(contextRef, screenCenter.x, screenCenter.y, 5.0, 0,2*3.1415926535898,1);
+    CGContextDrawPath(contextRef,kCGPathFill);
+    
+    CGContextRestoreGState(contextRef);
     
 }
 
