@@ -53,7 +53,7 @@
     }];
     
     [request startAsynchronous];
-    
+
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
@@ -82,6 +82,10 @@
 	NSLog(@"Error: %@", [error description]);
 }
 
+- (void) updateUI {
+    NSLog(@"currentHeading: %@", currentHeading);
+    //NSLog(@"currentLocation: %@", currentLocation);
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return interfaceOrientation == UIInterfaceOrientationPortrait;
