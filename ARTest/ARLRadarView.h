@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ARLRadarView : NSObject
+@interface ARLRadarView : UIView
+{
+    int numCircles;
+    int spacing;
+//    NSMutableArray* circles;
+    CGPoint center;
+}
 
 @end

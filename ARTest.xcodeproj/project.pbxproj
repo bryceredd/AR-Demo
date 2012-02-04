@@ -91,6 +91,7 @@
 		02D6CB0914DD0A6A00E9B909 /* ARLPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 02D6CB0714DD0A6A00E9B909 /* ARLPlayer.h */; };
 		02D6CB0A14DD0A6A00E9B909 /* ARLPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6CB0814DD0A6A00E9B909 /* ARLPlayer.m */; };
 		02D6CB0C14DD10D300E9B909 /* bowlerhat.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D6CB0B14DD10D300E9B909 /* bowlerhat.png */; };
+		E4476E2914DD19BA001045BB /* ARLRadarView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4476E2814DD19BA001045BB /* ARLRadarView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,6 +192,8 @@
 		02D6CB0714DD0A6A00E9B909 /* ARLPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLPlayer.h; sourceTree = "<group>"; };
 		02D6CB0814DD0A6A00E9B909 /* ARLPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLPlayer.m; sourceTree = "<group>"; };
 		02D6CB0B14DD10D300E9B909 /* bowlerhat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bowlerhat.png; sourceTree = "<group>"; };
+		E4476E2714DD19BA001045BB /* ARLRadarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLRadarView.h; sourceTree = "<group>"; };
+		E4476E2814DD19BA001045BB /* ARLRadarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLRadarView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,11 +238,7 @@
 		02D6C9C114DC5A6800E9B909 = {
 			isa = PBXGroup;
 			children = (
-				02D6CAFC14DCD7DA00E9B909 /* SystemConfiguration.framework */,
-				02D6CA3514DCD27600E9B909 /* CFNetwork.framework */,
 				02D6CA3314DCD26A00E9B909 /* libz.dylib */,
-				02D6CA3114DCD26300E9B909 /* MobileCoreServices.framework */,
-				02D6CA2A14DCD19D00E9B909 /* CoreLocation.framework */,
 				02D6C9D614DC5A6800E9B909 /* ARTest */,
 				02D6CA8414DCD2B300E9B909 /* ASIHttpRequest */,
 				02D6C9CF14DC5A6800E9B909 /* Frameworks */,
@@ -259,6 +258,10 @@
 		02D6C9CF14DC5A6800E9B909 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02D6CAFC14DCD7DA00E9B909 /* SystemConfiguration.framework */,
+				02D6CA3514DCD27600E9B909 /* CFNetwork.framework */,
+				02D6CA3114DCD26300E9B909 /* MobileCoreServices.framework */,
+				02D6CA2A14DCD19D00E9B909 /* CoreLocation.framework */,
 				02D6CA0514DC74A800E9B909 /* CoreMedia.framework */,
 				02D6CA0314DC74A300E9B909 /* CoreVideo.framework */,
 				02D6CA0114DC748600E9B909 /* OpenGLES.framework */,
@@ -276,8 +279,7 @@
 		02D6C9D614DC5A6800E9B909 /* ARTest */ = {
 			isa = PBXGroup;
 			children = (
-				02D6CA1814DCCC0D00E9B909 /* Monster1.png */,
-				02D6CB0B14DD10D300E9B909 /* bowlerhat.png */,
+				E4476E2614DD1417001045BB /* Images */,
 				02D6C9FA14DC711700E9B909 /* BRMacros.h */,
 				02D6C9DF14DC5A6800E9B909 /* ARLAppDelegate.h */,
 				02D6C9E014DC5A6800E9B909 /* ARLAppDelegate.m */,
@@ -285,6 +287,8 @@
 				02D6C9E514DC5A6800E9B909 /* MainStoryboard_iPad.storyboard */,
 				02D6C9E814DC5A6800E9B909 /* ARLViewController.h */,
 				02D6C9E914DC5A6800E9B909 /* ARLViewController.m */,
+				E4476E2714DD19BA001045BB /* ARLRadarView.h */,
+				E4476E2814DD19BA001045BB /* ARLRadarView.m */,
 				02D6CA1414DCB2A200E9B909 /* ARLRadarViewController.h */,
 				02D6CA1514DCB2A200E9B909 /* ARLRadarViewController.m */,
 				02D6C9D714DC5A6800E9B909 /* Supporting Files */,
@@ -371,6 +375,15 @@
 				02D6CA8614DCD2B300E9B909 /* ASIHttpRequest-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E4476E2614DD1417001045BB /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				02D6CA1814DCCC0D00E9B909 /* Monster1.png */,
+				02D6CB0B14DD10D300E9B909 /* bowlerhat.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -501,6 +514,7 @@
 				02D6C9E114DC5A6800E9B909 /* ARLAppDelegate.m in Sources */,
 				02D6C9EA14DC5A6800E9B909 /* ARLViewController.m in Sources */,
 				02D6CA1614DCB2A200E9B909 /* ARLRadarViewController.m in Sources */,
+				E4476E2914DD19BA001045BB /* ARLRadarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,6 +711,7 @@
 				02D6CA8C14DCD2B300E9B909 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
