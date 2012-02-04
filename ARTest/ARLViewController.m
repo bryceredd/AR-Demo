@@ -33,7 +33,6 @@ AVCaptureSession *session;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     NSError * error;
     
     detector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:[NSDictionary dictionaryWithObject:CIDetectorAccuracyLow forKey:CIDetectorAccuracy]];
@@ -109,10 +108,9 @@ AVCaptureSession *session;
     CGAffineTransform transform = CGAffineTransformMakeScale(widthSc, heightSc);
     transform = CGAffineTransformRotate(transform, degreesToRadian(-90));
     
-    image = [CIFilter filterWithName:@"CIAffineTransform" keysAndValues:kCIInputImageKey, image, @"inputTransform", [NSValue valueWithCGAffineTransform:transform],nil].outputImage; 
+    image = [CIFilter filterWithName:@"CIAffineTransform" keysAndValues:kCIInputImageKey, image, @"inputTransform", [NSValue valueWithCGAffineTransform:transform],nil].outputImage;
  
     [coreImageContext drawImage:image atPoint:CGPointZero fromRect:[image extent]];
-    
     
     
     if(!isScanningForFace) {
@@ -121,17 +119,20 @@ AVCaptureSession *session;
         CGAffineTransform smallTransform = CGAffineTransformMakeScale(widthSc/4.f, heightSc/4.f);
         CIImage* smallImage = [CIFilter filterWithName:@"CIAffineTransform" keysAndValues:kCIInputImageKey, image, @"inputTransform", [NSValue valueWithCGAffineTransform:smallTransform], nil].outputImage; 
         
+        float scaleWidth = widthSc / 4.f;
+        float scaleHeight = heightSc / 4.f;
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
             NSArray *features = [detector featuresInImage:smallImage];
-            NSLog(@"%d faces detected", features.count);
+            NSLog(@"%d faces detected  %f %f", features.count, scaleWidth, scaleHeight);
             
             for(CIFaceFeature* feature in features) {
                 NSLog(@"%@", NSStringFromCGRect([feature bounds]));
                 
                 CGRect rect = [feature bounds];
                 
-                rect.origin.y = (-(rect.origin.y + 80)) * 2.3;
+                rect.origin.y = (-(rect.origin.y + 50 + rect.size.width)) * 2.3;
                 rect.origin.x *= 2.3; 
                 rect.size.height *= 2.3f;
                 rect.size.width *= 2.3f;
@@ -163,6 +164,12 @@ AVCaptureSession *session;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return interfaceOrientation == UIInterfaceOrientationPortrait;
+}
+
+- (IBAction)radar:(id)sender {
+    UIViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ARLRadarViewController"];
+    
+    [self presentModalViewController:controller animated:YES];
 }
 
 @end
