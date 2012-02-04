@@ -142,7 +142,13 @@ AVCaptureSession *session;
                 NSLog(@"small image rect %@", NSStringFromCGRect(smallImageRect));
                 
                 
-                featureRect.origin.y = (smallImageRect.size.height - featureRect.origin.y) * 2.f;
+                float ratio = screenSize.height / screenSize.width;
+                float actualVisibleHeight = ratio * CGRectGetWidth(smallImageRect);
+                float upperCroppedPortion = CGRectGetHeight(smallImageRect) - actualVisibleHeight;
+                
+                
+                featureRect.origin.y = (smallImageRect.size.height - upperCroppedPortion) - featureRect.origin.y - featureRect.size.height;
+                
                 
                 CGRect rect = CGRectMake(featureRect.origin.x*scale/2.f, featureRect.origin.y*scale/2.f, featureRect.size.width*scale/2.f, featureRect.size.height*scale/2.f);
                 
@@ -163,7 +169,7 @@ AVCaptureSession *session;
             
             if(![features count]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [UIView animateWithDuration:3.25 animations:^{
+                    [UIView animateWithDuration:1.25 animations:^{
                         self.monster.alpha = 0;
                     }];
                 });
