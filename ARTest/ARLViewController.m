@@ -41,9 +41,9 @@ AVCaptureSession *session;
     
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
-    CGSize scrn = [UIScreen mainScreen].bounds.size;
+    //CGSize scrn = [UIScreen mainScreen].bounds.size;
     //UIScreen mainScreen.bounds returns the device in portrait, we need to switch it to landscape
-    screenSize = CGSizeMake(scrn.height, scrn.width);
+    screenSize = self.view.frame.size;
     
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
         float scl = [[UIScreen mainScreen] scale];
@@ -74,7 +74,7 @@ AVCaptureSession *session;
     
     session = [[AVCaptureSession alloc] init];
     [session beginConfiguration];
-    [session setSessionPreset:AVCaptureSessionPresetiFrame1280x720];
+    [session setSessionPreset:AVCaptureSessionPresetiFrame960x540];
     [session addInput:input];
     [session addOutput:dataOutput];
     [session commitConfiguration];
@@ -102,15 +102,17 @@ AVCaptureSession *session;
  
     CIImage *image = [CIImage imageWithCVPixelBuffer:pixelBuffer];
  
-    float heightSc = screenSize.height/(float)CVPixelBufferGetHeight(pixelBuffer);
-    float widthSc = screenSize.width/(float)CVPixelBufferGetWidth(pixelBuffer);
+    float heightSc = screenSize.width/(float)CVPixelBufferGetHeight(pixelBuffer);
+    float widthSc = screenSize.height/(float)CVPixelBufferGetWidth(pixelBuffer);
     
     heightSc = widthSc = MAX(heightSc, widthSc);
     
-    CGAffineTransform transform = CGAffineTransformMakeScale(widthSc, heightSc);
-    transform = CGAffineTransformRotate(transform, degreesToRadian(-90));
+    CGAffineTransform transform = CGAffineTransformMakeRotation(degreesToRadian(-90));
+    transform = CGAffineTransformScale(transform, widthSc, heightSc);
     
     image = [CIFilter filterWithName:@"CIAffineTransform" keysAndValues:kCIInputImageKey, image, @"inputTransform", [NSValue valueWithCGAffineTransform:transform],nil].outputImage;
+ 
+    
  
     [coreImageContext drawImage:image atPoint:CGPointZero fromRect:[image extent]];
     
@@ -118,27 +120,31 @@ AVCaptureSession *session;
     if(!isScanningForFace) {
         isScanningForFace = YES;
         
-        CGAffineTransform smallTransform = CGAffineTransformMakeScale(widthSc/4.f, heightSc/4.f);
+        float scale = 4.f;
+ 
+                      
+        CGAffineTransform smallTransform = CGAffineTransformMakeScale(1/scale, 1/scale);
+        smallTransform = CGAffineTransformTranslate(smallTransform, 0, CGRectGetHeight([image extent]));
+        
+        
         CIImage* smallImage = [CIFilter filterWithName:@"CIAffineTransform" keysAndValues:kCIInputImageKey, image, @"inputTransform", [NSValue valueWithCGAffineTransform:smallTransform], nil].outputImage; 
         
-        float scaleWidth = widthSc / 4.f;
-        float scaleHeight = heightSc / 4.f;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
             NSArray *features = [detector featuresInImage:smallImage];
-            NSLog(@"%d faces detected  %f %f", features.count, scaleWidth, scaleHeight);
+            CGRect smallImageRect = [smallImage extent];
             
             for(CIFaceFeature* feature in features) {
-                NSLog(@"%@", NSStringFromCGRect([feature bounds]));
+                CGRect featureRect = [feature bounds];
+            
+                NSLog(@"feature rect %@", NSStringFromCGRect([feature bounds]));
+                NSLog(@"small image rect %@", NSStringFromCGRect(smallImageRect));
                 
-                CGRect rect = [feature bounds];
                 
-                rect.origin.y = (-(rect.origin.y + 50 + rect.size.width)) * 2.3;
-                rect.origin.x *= 2.3; 
-                rect.size.height *= 2.3f;
-                rect.size.width *= 2.3f;
+                featureRect.origin.y = (smallImageRect.size.height - featureRect.origin.y) * 2.f;
                 
+                CGRect rect = CGRectMake(featureRect.origin.x*scale/2.f, featureRect.origin.y*scale/2.f, featureRect.size.width*scale/2.f, featureRect.size.height*scale/2.f);
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [UIView animateWithDuration:.5 animations:^{

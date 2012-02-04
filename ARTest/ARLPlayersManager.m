@@ -69,7 +69,7 @@
     NSNumber* latitude = [NSNumber numberWithFloat:self.currentLocation.coordinate.latitude];
     NSNumber* longitude = [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude];
     
-    NSDictionary* body = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[[UIDevice currentDevice] uniqueIdentifier], latitude, longitude, nil] forKeys:[NSArray arrayWithObjects:@"_id", @"lat", @"lon", nil]];
+    NSDictionary* body = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[[UIDevice currentDevice] uniqueIdentifier], latitude, longitude, nil] forKeys:[NSArray arrayWithObjects:@"playerId", @"lat", @"lon", nil]];
     
     [request appendPostData:[body JSONData]];
     
