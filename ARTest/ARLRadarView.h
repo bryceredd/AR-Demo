@@ -7,13 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ARLPlayersManager.h"
 
-@interface ARLRadarView : UIView
+@interface ARLRadarView : UIView <ARLPlayersDelegate>
 {
     int numCircles;
     int spacing;
 //    NSMutableArray* circles;
     CGPoint center;
 }
+
+- (void) didReceiveUpdate;
 
 @end

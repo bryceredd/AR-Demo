@@ -7,6 +7,8 @@
 //
 
 #import "ARLRadarView.h"
+#import "ARLPlayer.h"
+
 
 @implementation ARLRadarView
 
@@ -14,23 +16,19 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        [[ARLPlayersManager instance] addDelegate:self];
         numCircles = 3;
         if (self.bounds.size.width > self.bounds.size.height)
             spacing = self.bounds.size.width / (numCircles * 2);
         else
             spacing = self.bounds.size.height / (numCircles * 2);
-//        circles = [NSMutableArray arrayWithCapacity:numCircles];
-//        for (int i = 0; i < numCircles; i++)
-//        {
-//            
-//            CGRect rect;
-//            rect.origin.x = self.center.x - (i+1) * spacing;
-//            rect.origin.y = self.center.y - (i+1) * spacing;
-//            rect.size.width = 2 * (i+1) * spacing;
-//            [circles addObject:[NSValue valueWithCGRect:rect]];
-//        }
     }
     return self;
+}
+
+- (void) didReceiveUpdate
+{
+        [self setNeedsDisplay];
 }
 
 - (void) drawRect:(CGRect)rect
@@ -53,7 +51,19 @@
     }
     
     // Draw the line
-	
+
+    // Draw the players
+    CGPoint playerCenter;
+	// Set the circle fill color to green
+	CGContextSetRGBFillColor(contextRef, 0.0, 255.0, 0.0, 1.0);
+    for(ARLPlayer* player in [ARLPlayersManager instance].players) {
+        playerCenter.x = center.x + player.distanceFromMe.floatValue * cos(player.angle.floatValue);
+        playerCenter.y = center.y + player.distanceFromMe.floatValue * sin(player.angle.floatValue);
+        CGContextAddArc(contextRef,playerCenter.x, playerCenter.y, 4, 0,2*3.1415926535898,1);
+        CGContextDrawPath(contextRef,kCGPathFillStroke);
+//        NSLog(@"player at %f %f away from me", player.angle.floatValue, player.distanceFromMe.floatValue);
+    }
+
     
 }
 

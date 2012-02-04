@@ -14,7 +14,6 @@
 @interface ARLPlayersManager()
 @property (nonatomic, strong) NSMutableArray* delegates;
 @property(nonatomic, strong) NSTimer* timer;
-@property(nonatomic, strong) NSArray* players;
 - (void) sendLocation;
 - (void) requestPlayers;
 - (void) tick;
