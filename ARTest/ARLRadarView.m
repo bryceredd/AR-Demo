@@ -8,6 +8,7 @@
 
 #import "ARLRadarView.h"
 #import "ARLPlayer.h"
+#import "ARLPlayersManager.h"
 
 
 @implementation ARLRadarView
@@ -57,9 +58,13 @@
 	// Set the circle fill color to green
 	CGContextSetRGBFillColor(contextRef, 0.0, 255.0, 0.0, 1.0);
     for(ARLPlayer* player in [ARLPlayersManager instance].players) {
-        playerCenter.x = center.x + player.distanceFromMe.floatValue * cos(player.angle.floatValue);
-        playerCenter.y = center.y + player.distanceFromMe.floatValue * sin(player.angle.floatValue);
-        CGContextAddArc(contextRef,playerCenter.x, playerCenter.y, 4, 0,2*3.1415926535898,1);
+        
+        // add compass offset:
+        float angle = player.angle.floatValue - degreesToRadian([ARLPlayersManager instance].currentHeading.trueHeading);
+    
+        playerCenter.x = center.x + player.distanceFromMe.floatValue * cos(angle);
+        playerCenter.y = center.y + player.distanceFromMe.floatValue * sin(angle);
+        CGContextAddArc(contextRef,playerCenter.x, playerCenter.y, 4, 0, 2*M_PI, 1);
         CGContextDrawPath(contextRef,kCGPathFillStroke);
 //        NSLog(@"player at %f %f away from me", player.angle.floatValue, player.distanceFromMe.floatValue);
     }

@@ -21,6 +21,7 @@ AVCaptureSession *session;
 }
 -(void)setupCGContext;
 -(CGRect) monsterFrameFromFace:(CGRect)face;
+-(void) deviceOrientationDidChange:(id)sender;
 @property (strong, nonatomic) EAGLContext *context;
 @property (nonatomic, strong) UIAccelerometer* accelerometer;
 @end
@@ -229,6 +230,10 @@ AVCaptureSession *session;
 
 
 // calculate labels
+
+- (void) deviceOrientationDidChange:(id)sender {
+
+}
 
 - (void) didReceiveUpdate {
     

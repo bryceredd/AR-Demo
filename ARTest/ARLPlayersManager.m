@@ -113,25 +113,25 @@
     [request startAsynchronous];
 }
 
-- (BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager *)manager {
+- (BOOL) locationManagerShouldDisplayHeadingCalibration:(CLLocationManager *)manager {
 	return YES;
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
+- (void) locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
 	if (newHeading.headingAccuracy > 0) {
 		self.currentHeading = newHeading;
         [self notifyDelegates];
 	}
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+- (void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
     self.currentLocation = newLocation;
     //NSLog(@"Location: %@", [newLocation description]);
     
 }
 
-- (void)locationManager:(CLLocationManager *)manager
+- (void) locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error {
 	//NSLog(@"Error: %@", [error description]);
 }
