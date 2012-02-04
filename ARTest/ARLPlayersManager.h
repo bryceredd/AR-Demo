@@ -18,6 +18,7 @@
 @property (nonatomic, strong) CLLocationManager* locationManager;
 @property (nonatomic, strong) CLHeading* currentHeading;
 @property (nonatomic, strong) CLLocation* currentLocation;
+@property(nonatomic, strong) NSArray* players;
 
 +(ARLPlayersManager*) instance;
 
