@@ -23,6 +23,7 @@
 		02D6CA0214DC748600E9B909 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6CA0114DC748600E9B909 /* OpenGLES.framework */; };
 		02D6CA0414DC74A300E9B909 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6CA0314DC74A300E9B909 /* CoreVideo.framework */; };
 		02D6CA0614DC74A800E9B909 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6CA0514DC74A800E9B909 /* CoreMedia.framework */; };
+		02D6CA1614DCB2A200E9B909 /* ARLRadarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6CA1514DCB2A200E9B909 /* ARLRadarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,8 @@
 		02D6CA0114DC748600E9B909 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		02D6CA0314DC74A300E9B909 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		02D6CA0514DC74A800E9B909 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		02D6CA1414DCB2A200E9B909 /* ARLRadarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLRadarViewController.h; sourceTree = "<group>"; };
+		02D6CA1514DCB2A200E9B909 /* ARLRadarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLRadarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				02D6C9E514DC5A6800E9B909 /* MainStoryboard_iPad.storyboard */,
 				02D6C9E814DC5A6800E9B909 /* ARLViewController.h */,
 				02D6C9E914DC5A6800E9B909 /* ARLViewController.m */,
+				02D6CA1414DCB2A200E9B909 /* ARLRadarViewController.h */,
+				02D6CA1514DCB2A200E9B909 /* ARLRadarViewController.m */,
 				02D6C9D714DC5A6800E9B909 /* Supporting Files */,
 			);
 			path = ARTest;
@@ -198,6 +203,7 @@
 				02D6C9DD14DC5A6800E9B909 /* main.m in Sources */,
 				02D6C9E114DC5A6800E9B909 /* ARLAppDelegate.m in Sources */,
 				02D6C9EA14DC5A6800E9B909 /* ARLViewController.m in Sources */,
+				02D6CA1614DCB2A200E9B909 /* ARLRadarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +325,7 @@
 				02D6C9EF14DC5A6800E9B909 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -13,5 +13,6 @@
 
 @interface ARLViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 @property (weak, nonatomic) IBOutlet UIView *face;
+- (IBAction)radar:(id)sender;
 
 @end
