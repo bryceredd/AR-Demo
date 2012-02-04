@@ -24,6 +24,7 @@ AVCaptureSession *session;
 @end
 
 @implementation ARLViewController
+@synthesize face;
 @synthesize context;
 
 
@@ -35,7 +36,7 @@ AVCaptureSession *session;
     
     NSError * error;
     
-    detector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:[NSDictionary dictionaryWithObject:CIDetectorAccuracyHigh forKey:CIDetectorAccuracy]];
+    detector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:[NSDictionary dictionaryWithObject:CIDetectorAccuracyLow forKey:CIDetectorAccuracy]];
     
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
@@ -117,7 +118,7 @@ AVCaptureSession *session;
     if(!isScanningForFace) {
         isScanningForFace = YES;
         
-        CGAffineTransform smallTransform = CGAffineTransformMakeScale(.25, .25);
+        CGAffineTransform smallTransform = CGAffineTransformMakeScale(widthSc/4.f, heightSc/4.f);
         CIImage* smallImage = [CIFilter filterWithName:@"CIAffineTransform" keysAndValues:kCIInputImageKey, image, @"inputTransform", [NSValue valueWithCGAffineTransform:smallTransform], nil].outputImage; 
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -126,7 +127,21 @@ AVCaptureSession *session;
             NSLog(@"%d faces detected", features.count);
             
             for(CIFaceFeature* feature in features) {
-                NSLog(@"%@", feature);
+                NSLog(@"%@", NSStringFromCGRect([feature bounds]));
+                
+                CGRect rect = [feature bounds];
+                
+                rect.origin.y = (-(rect.origin.y + 80)) * 2.3;
+                rect.origin.x *= 2.3; 
+                rect.size.height *= 2.3f;
+                rect.size.width *= 2.3f;
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [UIView animateWithDuration:.25 animations:^{
+                        self.face.frame = rect;
+                    }];
+                });
             }
             
             [coreImageContext drawImage:image atPoint:CGPointZero fromRect:[image extent]];
@@ -142,6 +157,7 @@ AVCaptureSession *session;
 
 
 - (void)viewDidUnload {
+    [self setFace:nil];
     [super viewDidUnload];
 }
 
