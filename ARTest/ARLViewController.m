@@ -22,18 +22,32 @@ AVCaptureSession *session;
 -(void)setupCGContext;
 -(CGRect) monsterFrameFromFace:(CGRect)face;
 @property (strong, nonatomic) EAGLContext *context;
+@property (nonatomic, strong) UIAccelerometer* accelerometer;
 @end
 
 @implementation ARLViewController
 @synthesize face;
 @synthesize monster;
 @synthesize context;
+@synthesize accelerometer;
 
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    [[ARLPlayersManager instance] addDelegate:self];
+    self.accelerometer = [UIAccelerometer sharedAccelerometer];
+	self.accelerometer.updateInterval = 0.25;
+	self.accelerometer.delegate = self;
+    
+    	// Listen for changes in device orientation
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object:nil];
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];	
+
+
     
     NSError * error;
     
@@ -96,7 +110,7 @@ AVCaptureSession *session;
     CGColorSpaceRelease(colorSpace);
 }
 
--(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
  
     CVPixelBufferRef pixelBuffer = (CVPixelBufferRef)CMSampleBufferGetImageBuffer(sampleBuffer);
  
@@ -120,7 +134,7 @@ AVCaptureSession *session;
     if(!isScanningForFace) {
         isScanningForFace = YES;
         
-        float scale = 4.f;
+        float scale = 6.f;
  
                       
         CGAffineTransform smallTransform = CGAffineTransformMakeScale(1/scale, 1/scale);
@@ -138,23 +152,27 @@ AVCaptureSession *session;
             for(CIFaceFeature* feature in features) {
                 CGRect featureRect = [feature bounds];
             
-                NSLog(@"feature rect %@", NSStringFromCGRect([feature bounds]));
                 NSLog(@"small image rect %@", NSStringFromCGRect(smallImageRect));
                 
+                float ratio = screenSize.height / screenSize.width;
+                float actualVisibleHeight = ratio * CGRectGetWidth(smallImageRect);
+                float upperCroppedPortion = CGRectGetHeight(smallImageRect) - actualVisibleHeight;
                 
-                featureRect.origin.y = (smallImageRect.size.height - featureRect.origin.y) * 2.f;
+                featureRect.origin.y = (smallImageRect.size.height - upperCroppedPortion) - featureRect.origin.y - featureRect.size.height;
                 
-                CGRect rect = CGRectMake(featureRect.origin.x*scale/2.f, featureRect.origin.y*scale/2.f, featureRect.size.width*scale/2.f, featureRect.size.height*scale/2.f);
                 
+                float retinaFactor = retina? 2.f:1.f;
+                CGRect rect = CGRectMake(
+                    featureRect.origin.x*scale/retinaFactor, 
+                    featureRect.origin.y*scale/retinaFactor, 
+                    featureRect.size.width*scale/retinaFactor, 
+                    featureRect.size.height*scale/retinaFactor);
+                    
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [UIView animateWithDuration:.5 animations:^{
+                    [UIView animateWithDuration:.1 animations:^{
                         self.face.frame = rect;
                         self.monster.frame = [self monsterFrameFromFace:rect];
                         self.monster.alpha = 1.f;
-                    } completion:^(BOOL finished) {
-//                        [UIView animateWithDuration:.25 animations:^{
-//                            self.monster.frame = [self monsterFrameFromFace:rect];
-//                        }];
                     }];
                 });
                 
@@ -163,7 +181,7 @@ AVCaptureSession *session;
             
             if(![features count]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [UIView animateWithDuration:3.25 animations:^{
+                    [UIView animateWithDuration:1.25 animations:^{
                         self.monster.alpha = 0;
                     }];
                 });
@@ -206,5 +224,16 @@ AVCaptureSession *session;
     
     [self presentModalViewController:controller animated:YES];
 }
+
+
+
+
+// calculate labels
+
+- (void) didReceiveUpdate {
+    
+}
+
+
 
 @end
