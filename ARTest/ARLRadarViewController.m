@@ -8,6 +8,7 @@
 
 #import "ARLRadarViewController.h"
 #import "ASIHTTPRequest.h"
+#import "JSONKit.h"
 
 @interface ARLRadarViewController() {
     int degree;
@@ -15,12 +16,15 @@
 @property(nonatomic, strong) NSTimer* timer;
 @property(nonatomic, strong) CLHeading* currentHeading;
 @property(nonatomic, strong) CLLocation* currentLocation;
+@property(nonatomic, strong) NSArray* playerLocations;
 - (void) tick;
 - (void) updateUI;
+- (void) sendLocation;
+- (void) requestPlayerLocations;
 @end
 
 @implementation ARLRadarViewController
-@synthesize sweeper, timer, locationManager, currentLocation, currentHeading;
+@synthesize sweeper, timer, locationManager, currentLocation, currentHeading, playerLocations;
 
 - (void)viewDidLoad {
     self.timer = [NSTimer scheduledTimerWithTimeInterval:5.f target:self selector:@selector(tick) userInfo:nil repeats:YES];
@@ -38,9 +42,23 @@
 }
 
 - (void) tick {
-    ASIHTTPRequest* request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://bozar.dyndns.org:1337/players"]];
-    [request setRequestMethod:@"GET"];
+    
+    [self sendLocation];
+    [self requestPlayerLocations];
+    
+}
+
+- (void) sendLocation {
+    ASIHTTPRequest* request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://bozar.dyndns.org/update"]];
+    [request setRequestMethod:@"POST"];
     [request addRequestHeader:@"Content-Type" value:@"application/json"];
+    
+    NSNumber* latitude = [NSNumber numberWithFloat:self.currentLocation.coordinate.latitude];
+    NSNumber* longitude = [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude];
+    
+    NSDictionary* body = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[[UIDevice currentDevice] uniqueIdentifier], latitude, longitude, nil] forKeys:[NSArray arrayWithObjects:@"_id", @"lat", @"lon", nil]];
+    
+    [request appendPostData:[body JSONData]];
     
     [request setCompletionBlock:^{
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -53,7 +71,29 @@
     }];
     
     [request startAsynchronous];
+}
 
+- (void) requestPlayerLocations {
+    ASIHTTPRequest* request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://bozar.dyndns.org/players"]];
+    [request setRequestMethod:@"GET"];
+    [request addRequestHeader:@"Content-Type" value:@"application/json"];
+    
+    [request setCompletionBlock:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSError * err = nil;
+            id results = [[JSONDecoder decoder] parseJSONData:[request responseData] error:&err];
+            
+            self.playerLocations = results;
+            
+            [self updateUI];
+        });
+    }];
+    
+    [request setFailedBlock:^{
+        NSLog(@"fail!");
+    }];
+    
+    [request startAsynchronous];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
@@ -73,17 +113,17 @@
            fromLocation:(CLLocation *)oldLocation {
     
     self.currentLocation = newLocation;
-    NSLog(@"Location: %@", [newLocation description]);
+    //NSLog(@"Location: %@", [newLocation description]);
     
 }
 
 - (void)locationManager:(CLLocationManager *)manager
            didFailWithError:(NSError *)error {
-	NSLog(@"Error: %@", [error description]);
+	//NSLog(@"Error: %@", [error description]);
 }
 
 - (void) updateUI {
-    NSLog(@"currentHeading: %@", currentHeading);
+    //NSLog(@"currentHeading: %@", currentHeading);
     //NSLog(@"currentLocation: %@", currentLocation);
 }
 

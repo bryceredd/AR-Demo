@@ -84,6 +84,8 @@
 		02D6CAF214DCD34C00E9B909 /* libASIHttpRequest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6CA8214DCD2B300E9B909 /* libASIHttpRequest.a */; };
 		02D6CAFD14DCD7DA00E9B909 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6CAFC14DCD7DA00E9B909 /* SystemConfiguration.framework */; };
 		02D6CAFE14DCD80600E9B909 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6CAFC14DCD7DA00E9B909 /* SystemConfiguration.framework */; };
+		02D6CB0114DCFEFB00E9B909 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 02D6CAFF14DCFEFB00E9B909 /* JSONKit.h */; };
+		02D6CB0214DCFEFB00E9B909 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6CB0014DCFEFB00E9B909 /* JSONKit.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +179,8 @@
 		02D6CABB14DCD2F500E9B909 /* ASICloudFilesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICloudFilesRequest.h; sourceTree = "<group>"; };
 		02D6CABC14DCD2F500E9B909 /* ASICloudFilesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASICloudFilesRequest.m; sourceTree = "<group>"; };
 		02D6CAFC14DCD7DA00E9B909 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		02D6CAFF14DCFEFB00E9B909 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		02D6CB0014DCFEFB00E9B909 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +295,8 @@
 		02D6CA8414DCD2B300E9B909 /* ASIHttpRequest */ = {
 			isa = PBXGroup;
 			children = (
+				02D6CAFF14DCFEFB00E9B909 /* JSONKit.h */,
+				02D6CB0014DCFEFB00E9B909 /* JSONKit.m */,
 				02D6CA8D14DCD2F500E9B909 /* Reachability.h */,
 				02D6CA8E14DCD2F500E9B909 /* Reachability.m */,
 				02D6CA8F14DCD2F500E9B909 /* ASIHTTPRequestConfig.h */,
@@ -385,6 +391,7 @@
 				02D6CAE714DCD2F500E9B909 /* ASICloudFilesObject.h in Headers */,
 				02D6CAE914DCD2F500E9B909 /* ASICloudFilesObjectRequest.h in Headers */,
 				02D6CAEB14DCD2F500E9B909 /* ASICloudFilesRequest.h in Headers */,
+				02D6CB0114DCFEFB00E9B909 /* JSONKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +512,7 @@
 				02D6CAE814DCD2F500E9B909 /* ASICloudFilesObject.m in Sources */,
 				02D6CAEA14DCD2F500E9B909 /* ASICloudFilesObjectRequest.m in Sources */,
 				02D6CAEC14DCD2F500E9B909 /* ASICloudFilesRequest.m in Sources */,
+				02D6CB0214DCFEFB00E9B909 /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
