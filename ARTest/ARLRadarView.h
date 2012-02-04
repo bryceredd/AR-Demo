@@ -13,7 +13,8 @@
 {
     int numCircles;
     int spacing;
-//    NSMutableArray* circles;
+    // scale is the screen to meters conversion in pixels per meter.
+    double scale;
     CGPoint center;
 }
 

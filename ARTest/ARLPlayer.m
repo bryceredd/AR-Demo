@@ -28,7 +28,7 @@
 
 
         self.distanceFromMe = [NSNumber numberWithFloat:[myLoc distanceFromLocation:hisLoc]];
-        self.angle = [NSNumber numberWithFloat:radiansToDegrees(atan2f(myLatitude-hisLatitude, myLongitude-hisLongitude))];
+        self.angle = [NSNumber numberWithFloat:(atan2f(myLatitude-hisLatitude, myLongitude-hisLongitude))];
 
 
     } return self;
