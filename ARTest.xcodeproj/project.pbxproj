@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0269553414DDF32E00B49D0E /* unicorn-head.png in Resources */ = {isa = PBXBuildFile; fileRef = 0269553314DDF32E00B49D0E /* unicorn-head.png */; };
 		02D6C9D114DC5A6800E9B909 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6C9D014DC5A6800E9B909 /* UIKit.framework */; };
 		02D6C9D314DC5A6800E9B909 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6C9D214DC5A6800E9B909 /* Foundation.framework */; };
 		02D6C9D514DC5A6800E9B909 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D6C9D414DC5A6800E9B909 /* CoreGraphics.framework */; };
@@ -105,6 +106,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0269553314DDF32E00B49D0E /* unicorn-head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unicorn-head.png"; sourceTree = "<group>"; };
 		02D6C9CC14DC5A6800E9B909 /* ARTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02D6C9D014DC5A6800E9B909 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		02D6C9D214DC5A6800E9B909 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -380,6 +382,7 @@
 		E4476E2614DD1417001045BB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0269553314DDF32E00B49D0E /* unicorn-head.png */,
 				02D6CA1814DCCC0D00E9B909 /* Monster1.png */,
 				02D6CB0B14DD10D300E9B909 /* bowlerhat.png */,
 			);
@@ -500,6 +503,7 @@
 				02D6C9E714DC5A6800E9B909 /* MainStoryboard_iPad.storyboard in Resources */,
 				02D6CA1914DCCC0D00E9B909 /* Monster1.png in Resources */,
 				02D6CB0C14DD10D300E9B909 /* bowlerhat.png in Resources */,
+				0269553414DDF32E00B49D0E /* unicorn-head.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

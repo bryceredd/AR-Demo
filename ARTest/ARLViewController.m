@@ -198,12 +198,11 @@ AVCaptureSession *session;
 
 - (CGRect) monsterFrameFromFace:(CGRect)rect {
     
-    CGRect monsterRect;
+    float ratio = CGRectGetWidth(monster.frame) / CGRectGetHeight(monster.frame);
     
-    monsterRect.size.width = CGRectGetWidth(rect) * 1.5;
-    monsterRect.size.height = CGRectGetWidth(rect) * 1.5;
-    monsterRect.origin.x = CGRectGetMinX(rect) - monsterRect.size.width*.25;
-    monsterRect.origin.y = rect.origin.y - monsterRect.size.width;
+    rect.size.width = rect.size.height * ratio;
+    
+    CGRect monsterRect = CGRectScale(rect, 3);
     
     return monsterRect;
 }
@@ -223,8 +222,6 @@ AVCaptureSession *session;
     
     [self presentModalViewController:controller animated:YES];
 }
-
-
 
 
 // calculate labels
