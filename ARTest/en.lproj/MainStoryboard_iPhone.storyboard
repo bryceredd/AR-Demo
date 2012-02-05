@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2166" systemVersion="11C74" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1166"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
         <scene sceneID="5">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -47,14 +46,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="face" destination="ogU-Fq-YVI" id="Ueg-Ku-r20"/>
-                        <outlet property="monster" destination="ec7-U1-tZj" id="9Ni-Nj-Ota"/>
+                        <outlet property="faceOverlay" destination="ogU-Fq-YVI" id="Siu-bC-tCt"/>
+                        <outlet property="unicornImageView" destination="ec7-U1-tZj" id="WeO-pp-iO5"/>
                     </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="458" y="87"/>
         </scene>
-        <!--Radar View Controller-->
         <scene sceneID="4MV-2K-A7e">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfN-db-vVh" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -19,18 +19,15 @@ AVCaptureSession *session;
     
     CGSize screenSize;
 }
--(void)setupCGContext;
--(CGRect) monsterFrameFromFace:(CGRect)face;
--(void) deviceOrientationDidChange:(id)sender;
+- (CGRect) unicornImageViewFrameFromFace:(CGRect)rect;
 @property (strong, nonatomic) EAGLContext *context;
-@property (nonatomic, strong) UIAccelerometer* accelerometer;
 @end
 
+
 @implementation ARLViewController
-@synthesize face;
-@synthesize monster;
+@synthesize faceOverlay;
+@synthesize unicornImageView;
 @synthesize context;
-@synthesize accelerometer;
 
 
 #pragma mark - View lifecycle
@@ -40,33 +37,26 @@ AVCaptureSession *session;
     
     
     [[ARLPlayersManager instance] addDelegate:self];
-    self.accelerometer = [UIAccelerometer sharedAccelerometer];
-	self.accelerometer.updateInterval = 0.25;
-	self.accelerometer.delegate = self;
-    
-    	// Listen for changes in device orientation
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object:nil];
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];	
-
 
     
-    NSError * error;
     
     detector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:[NSDictionary dictionaryWithObject:CIDetectorAccuracyLow forKey:CIDetectorAccuracy]];
-    
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
-    //CGSize scrn = [UIScreen mainScreen].bounds.size;
-    //UIScreen mainScreen.bounds returns the device in portrait, we need to switch it to landscape
-    screenSize = self.view.frame.size;
     
+    screenSize = self.view.frame.size;
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
         float scl = [[UIScreen mainScreen] scale];
+        
+        // the vc is locked in portrait, but the camera buffer returns the image in landscape,
+        // so we have to switch the width/height
         screenSize = CGSizeMake(screenSize.width * scl, screenSize.height * scl);
     }
     
     
     
+    
+    // setup the context
     GLKView* view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
@@ -76,9 +66,19 @@ AVCaptureSession *session;
     
     coreImageContext = [CIContext contextWithEAGLContext:self.context];
     
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    NSUInteger bytesPerPixel = 4;
+    NSUInteger bytesPerRow = bytesPerPixel * screenSize.width;
+    NSUInteger bitsPerComponent = 8;
+ 
+    cgcontext = CGBitmapContextCreate(NULL, screenSize.width, screenSize.height, bitsPerComponent, bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast);
+    CGColorSpaceRelease(colorSpace);
     
     
     
+    
+    // setup the image capture
+    NSError * error;
     AVCaptureDevice * videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
     
@@ -95,26 +95,13 @@ AVCaptureSession *session;
     [session commitConfiguration];
     [session startRunning];
     
-    [self setupCGContext];
     
 }
 
-- (void)setupCGContext {
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
- 
-    NSUInteger bytesPerPixel = 4;
-    NSUInteger bytesPerRow = bytesPerPixel * screenSize.width;
-    NSUInteger bitsPerComponent = 8;
- 
-    cgcontext = CGBitmapContextCreate(NULL, screenSize.width, screenSize.height, bitsPerComponent, bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast);
- 
-    CGColorSpaceRelease(colorSpace);
-}
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
  
     CVPixelBufferRef pixelBuffer = (CVPixelBufferRef)CMSampleBufferGetImageBuffer(sampleBuffer);
- 
     CIImage *image = [CIImage imageWithCVPixelBuffer:pixelBuffer];
  
     float heightSc = screenSize.width/(float)CVPixelBufferGetHeight(pixelBuffer);
@@ -125,23 +112,22 @@ AVCaptureSession *session;
     CGAffineTransform transform = CGAffineTransformMakeRotation(degreesToRadian(-90));
     transform = CGAffineTransformScale(transform, widthSc, heightSc);
     
+    // we use this image for the display
     image = [CIFilter filterWithName:@"CIAffineTransform" keysAndValues:kCIInputImageKey, image, @"inputTransform", [NSValue valueWithCGAffineTransform:transform],nil].outputImage;
  
-    
- 
+     
     [coreImageContext drawImage:image atPoint:CGPointZero fromRect:[image extent]];
     
     
     if(!isScanningForFace) {
         isScanningForFace = YES;
-        
-        float scale = 6.f;
  
-                      
+        
+        // resize the image again to scan for faces - it makes it faster
+        float scale = 6.f;
+               
         CGAffineTransform smallTransform = CGAffineTransformMakeScale(1/scale, 1/scale);
         smallTransform = CGAffineTransformTranslate(smallTransform, 0, CGRectGetHeight([image extent]));
-        
-        
         CIImage* smallImage = [CIFilter filterWithName:@"CIAffineTransform" keysAndValues:kCIInputImageKey, image, @"inputTransform", [NSValue valueWithCGAffineTransform:smallTransform], nil].outputImage; 
         
         
@@ -169,9 +155,9 @@ AVCaptureSession *session;
                     
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [UIView animateWithDuration:.1 animations:^{
-                        self.face.frame = rect;
-                        self.monster.frame = [self monsterFrameFromFace:rect];
-                        self.monster.alpha = 1.f;
+                        self.faceOverlay.frame = rect;
+                        self.unicornImageView.frame = [self unicornImageViewFrameFromFace:rect];
+                        self.unicornImageView.alpha = 1.f;
                     }];
                 });
                 
@@ -181,7 +167,7 @@ AVCaptureSession *session;
             if(![features count]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [UIView animateWithDuration:1.25 animations:^{
-                        self.monster.alpha = 0;
+                        self.unicornImageView.alpha = 0;
                     }];
                 });
             }
@@ -196,20 +182,18 @@ AVCaptureSession *session;
     [self.context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
-- (CGRect) monsterFrameFromFace:(CGRect)rect {
+- (CGRect) unicornImageViewFrameFromFace:(CGRect)rect {
     
-    float ratio = CGRectGetWidth(monster.frame) / CGRectGetHeight(monster.frame);
+    float ratio = CGRectGetWidth(unicornImageView.frame) / CGRectGetHeight(unicornImageView.frame);
     
     rect.size.width = rect.size.height * ratio;
     
-    CGRect monsterRect = CGRectScale(rect, 3);
-    
-    return monsterRect;
+    return CGRectScale(rect, 3);
 }
 
 - (void)viewDidUnload {
-    [self setFace:nil];
-    [self setMonster:nil];
+    [self setFaceOverlay:nil];
+    [self setUnicornImageView:nil];
     [super viewDidUnload];
 }
 
@@ -222,18 +206,6 @@ AVCaptureSession *session;
     
     [self presentModalViewController:controller animated:YES];
 }
-
-
-// calculate labels
-
-- (void) deviceOrientationDidChange:(id)sender {
-
-}
-
-- (void) didReceiveUpdate {
-    
-}
-
 
 
 @end

@@ -14,8 +14,8 @@
 #import "ARLPlayersManager.h"
 
 @interface ARLViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate, ARLPlayersDelegate, UIAccelerometerDelegate>
-@property (weak, nonatomic) IBOutlet UIView *face;
-@property (weak, nonatomic) IBOutlet UIImageView *monster;
+@property (weak, nonatomic) IBOutlet UIView *faceOverlay;
+@property (weak, nonatomic) IBOutlet UIImageView *unicornImageView;
 - (IBAction)radar:(id)sender;
 
 @end
